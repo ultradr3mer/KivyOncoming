@@ -3,19 +3,19 @@
     precision highp float;
 #endif
 
+attribute vec3 v_position;
+attribute vec3 v_normal;
+attribute vec2 v_texture;
+
 uniform mat4 modelview_matrix;
 uniform mat4 projection_matrix;
 
-in vec3 in_position;
-in vec3 in_normal;
-in vec2 in_texture;
+varying vec2 v_tex;
 
-varying out vec2 v_tex;
-
-void main(void)
+void main()
 {
-    v_tex = in_texture;
-	gl_Position = projection_matrix * modelview_matrix * vec4(in_position, 1);
+    v_tex = v_texture;
+	gl_Position = projection_matrix * modelview_matrix * vec4(v_position, 1);
 }
 
 ---FRAGMENT SHADER-----------------------------------------------------
@@ -23,11 +23,10 @@ void main(void)
     precision highp float;
 #endif
 
-in vec2 v_tex;
+varying vec2 v_tex;
 
 uniform sampler2D texture0;
 
 void main() {
 	gl_FragColor = texture2D(texture0, v_tex);
-	gl_FragColor.a = 1.0;
 }

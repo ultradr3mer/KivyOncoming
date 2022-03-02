@@ -1,5 +1,4 @@
-from kivy.graphics import Mesh
-import numpy as np
+import kivy.graphics
 
 
 class Obj:
@@ -89,12 +88,12 @@ class Obj:
                                                                                    face[2][0], face[2][1]]])
         indices = list(range(len(self.faces) * 3))
 
-        return Mesh(
+        return kivy.graphics.Mesh(
             vertices=vertices,
             indices=indices,
-            fmt=[(b'in_position', 3, 'float'),
-                 (b'in_normal', 3, 'float'),
-                 (b'in_texture', 2, 'float')],
+            fmt=[(b'v_position', 3, 'float'),
+                 (b'v_normal', 3, 'float'),
+                 (b'v_texture', 2, 'float')],
             mode='triangles'
         )
 

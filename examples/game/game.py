@@ -1,14 +1,14 @@
-import kivy.app
+from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.image import Image
-from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.resources import resource_find
+# the findow Import is nessesarry, otherwise the app does not start
+from kivy.core.window import Window
 from kivy.graphics.transformation import Matrix
 from kivy.graphics.opengl import glEnable, glDisable, GL_DEPTH_TEST
 from kivy.graphics import RenderContext, Callback, Color
-from obj_loader import Obj
-
+from examples.game.obj_loader import Obj
 
 class Renderer(Widget):
     def __init__(self, **kwargs):
@@ -40,7 +40,7 @@ class Renderer(Widget):
         self.mesh.texture = Image(resource_find("tesla.dds")).texture
 
 
-class RendererApp(kivy.app.App):
+class RendererApp(App):
     def build(self):
         return Renderer()
 
